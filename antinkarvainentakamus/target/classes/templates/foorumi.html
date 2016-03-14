@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Foorumi</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="refresh" content="40"/>
+    </head>
+
+    <body>
+        <h1>Harvinaisen karvainen foorumi</h1>
+        
+        <h2>Keskustelualueet</h2>
+        
+        <table>
+            <tr>
+                <th>Alue</th>
+                <th>Viestejä</th>
+                <th>Viimeisin viesti</th>
+            </tr>
+            <tr th:each="alue: ${alueet}">
+                <td><a th:href="@{~/alue/{alue_id}(alue_id=${alue.id})}" th:text="${alue.nimi}">klik</a></td>
+                <td th:text="${alue.viestejaAlueella()}"></td>
+                <td th:text="${alue.viimeisin()}"></td>
+            </tr>
+        </table>
+        
+        <h2>Lisää uusi keskustelualue</h2>
+        <form method="POST" action="/foorumi">
+            Uuden keskustelualueen nimi:<br/>
+            <input type="text" name="nimi"/><br/>
+            <input type="submit" value="Lisää alue"/>
+        </form>
+
+
+    </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Keskustelut</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="refresh" content="40"/>
+    </head>
+
+    <body>
+        <h1 th:text="${alue.nimi}"></h1>
+        
+        <h2>Keskustelut</h2>
+        
+        <table>
+            <tr>
+                <th>Keskustelu</th>
+                <th>Viestejä</th>
+                <th>Viimeisin viesti</th>
+            </tr>
+            <tr th:each="keskustelu: ${alue.keskustelut}">
+                <td><a th:href="@{~/keskustelu/{keskustelu_id}(keskustelu_id=${keskustelu.id})}" th:text="${keskustelu.nimi}">klik</a></td>
+                <td th:text="${keskustelu.viestit.size()}"></td>
+                <td th:text="${keskustelu.viimeisin()}"></td>
+            </tr>
+        </table>
+        
+        <h2>Lisää uusi keskustelu</h2>
+        <form method="POST" action="/alue">
+            Uuden keskustelun otsikko:<br/>
+            <input type="text" name="otsikko"/><br/>
+            <input type="submit" value="Lisää keskustelu"/>
+        </form>
+        
+    </body>
+</html>
